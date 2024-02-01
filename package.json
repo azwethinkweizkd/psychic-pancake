@@ -1,0 +1,19 @@
+{
+	"name": "psychic-pancake",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+		"start:frontend": "cd client && npm run dev",
+		"start:backend": "cd server && npm run dev",
+		"build": "cd server && npm run build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"concurrently": "^8.2.2",
+		"nodemon": "^3.0.3"
+	}
+}
