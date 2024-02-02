@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import db from "../db";
+import db from "../../db";
 
-const router = express.Router();
+const usersRouter = express.Router();
 
-router.get("/", async (req: Request, res: Response) => {
+usersRouter.get("/", async (req: Request, res: Response) => {
 	try {
 		const users = await db.user.findMany();
 		res.json(users);
@@ -14,4 +14,4 @@ router.get("/", async (req: Request, res: Response) => {
 	}
 });
 
-export default router;
+export default usersRouter;
