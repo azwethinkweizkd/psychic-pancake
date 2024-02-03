@@ -6,7 +6,8 @@ async function main() {
 		update: {},
 		create: {
 			email: "alice@prisma.io",
-			name: "Alice",
+			firstname: "Alice",
+			lastname: "Whocares",
 		},
 	});
 	const bob = await prisma.user.upsert({
@@ -14,7 +15,8 @@ async function main() {
 		update: {},
 		create: {
 			email: "bob@prisma.io",
-			name: "Bob",
+			firstname: "Bob",
+			lastname: "Da Bildier",
 		},
 	});
 	console.log({ alice, bob });
