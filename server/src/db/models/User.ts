@@ -1,6 +1,10 @@
 export interface User {
-	id: number;
-	name: string;
+	id: string;
+	firstName: string;
+	lastName: string;
 	email: string;
-	dateCreated: Date;
+	password: string;
+	refreshTokens: [];
+	createdAt: Date;
+	updatedAt: Date;
 }
