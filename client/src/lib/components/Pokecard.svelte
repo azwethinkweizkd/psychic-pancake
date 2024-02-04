@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
-	import type { PokemonCard } from '../../types/pokemon';
+	import type { PokemonCard } from '../../../types/pokemon';
 
 	export let pokemon: PokemonCard;
 
@@ -16,11 +16,13 @@
           --rotateX: ${rotateX}deg;
           --rotateY: ${rotateY}deg;
           --brightness: ${brightness};
+          --maxShadowOffsetX: ${-rotateY * 0.4}px;
+          --maxShadowOffsetY: ${rotateX * 0.4}px;
+          --blurRadius: ${brightness * 0.4}px;
+          --spreadRadius: ${brightness * 0.4}px;
       `;
 	const scaleX = scaleLinear().domain([0, height]).range([-maxRotation, maxRotation]);
-
 	const scaleY = scaleLinear().domain([0, width]).range([maxRotation, -maxRotation]);
-
 	const scaleBrightness = scaleLinear().domain([0, height]).range([1.5, 0.5]);
 
 	function onMouseMove(ev) {
@@ -30,8 +32,6 @@
 		rotateY = scaleY(mouseX);
 		rotateX = scaleX(mouseY);
 		brightness = scaleBrightness(mouseY);
-
-		console.log(rotateY, rotateX, brightness);
 	}
 
 	function onMouseLeave(ev) {
@@ -84,6 +84,18 @@
 		transform: scale(1) rotateX(var(--rotateX)) rotateY(var(--rotateY));
 		perspective: 600px;
 		transition: all 250ms ease-out;
+
+		--maxShadowOffsetX: 512px;
+		--maxShadowOffsetY: -512px;
+		--blurRadius: 512px;
+		--spreadRadius: 512px;
+
+		box-shadow: var(--maxShadowOffsetX) var(--maxShadowOffsetY) var(--blurRadius)
+			var(--spreadRadius) rgba(0, 0, 0, 0.5);
+		-webkit-box-shadow: var(--maxShadowOffsetX) var(--maxShadowOffsetY) var(--blurRadius)
+			var(--spreadRadius) rgba(0, 0, 0, 0.5);
+		-moz-box-shadow: var(--maxShadowOffsetX) var(--maxShadowOffsetY) var(--blurRadius)
+			var(--spreadRadius) rgba(0, 0, 0, 0.5);
 	}
 
 	.poke-card:hover {

@@ -1,9 +1,16 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import db from "../../db";
+import { isAuthenticated } from "../../middlewares";
+import { findUserById } from "./users.services";
 
-const usersRouter = express.Router();
+const router = express.Router();
 
-usersRouter.get("/", async (req: Request, res: Response) => {
+router.get("/is-authenticated", isAuthenticated, (req, res) => {
+	// Access user information from req.user if needed
+	res.json({ message: "Access granted. User authenticated." });
+});
+
+router.get("/all-users", async (_: Request, res: Response) => {
 	try {
 		const users = await db.user.findMany();
 		res.json(users);
@@ -14,4 +21,4 @@ usersRouter.get("/", async (req: Request, res: Response) => {
 	}
 });
 
-export default usersRouter;
+export default router;

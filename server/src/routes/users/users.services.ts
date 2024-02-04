@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import db from "../../db/index";
-import { User } from "@prisma/client";
 
 function findUserByEmail(email: string) {
 	return db.user.findUnique({
@@ -17,7 +16,7 @@ function createUserByEmailAndPassword(user: any) {
 	});
 }
 
-function findUerById(id: string) {
+function findUserById(id: string) {
 	return db.user.findUnique({
 		where: {
 			id,
@@ -25,4 +24,4 @@ function findUerById(id: string) {
 	});
 }
 
-export { findUserByEmail, findUerById, createUserByEmailAndPassword };
+export { findUserByEmail, findUserById, createUserByEmailAndPassword };
