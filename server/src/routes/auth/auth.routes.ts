@@ -107,7 +107,6 @@ router.post("/refreshToken", async (req, res, next) => {
 			res.status(400);
 			throw new Error("Missing refresh token.");
 		}
-		console.log(process.env.JWT_ACCESS_SECRET);
 		const payload = jwt.verify(refreshToken, process.env.JWT_ACCESS_SECRET);
 		const savedRefreshToken = await findRefreshTokenById(payload.jti);
 
