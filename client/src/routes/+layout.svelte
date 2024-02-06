@@ -1,27 +1,29 @@
 <script lang="ts">
+	export let data;
 </script>
 
 <nav>
 	<div class="container">
-		<h2>Pokemon App</h2>
+		<h2>
+			<a href="/"> Pokemon App </a>
+		</h2>
 	</div>
 	<ul>
-		<!-- {#if data.isAuthenticated}
+		{#if data.user}
+			<li>
+				<a href="/dashboard"> Dashboard </a>
+			</li>
+
+			<li>
+				<form method="POST" action="/logout">
+					<button type="submit">Logout</button>
+				</form>
+			</li>
 		{:else}
-		{/if} -->
-		<li>
-			<a href="/login"> Login </a>
-		</li>
-
-		<li>
-			<a href="/dashboard"> Dashboard </a>
-		</li>
-
-		<li>
-			<form method="POST" action="/logout">
-				<button type="submit">Logout</button>
-			</form>
-		</li>
+			<li>
+				<a href="/login"> Login </a>
+			</li>
+		{/if}
 	</ul>
 </nav>
 

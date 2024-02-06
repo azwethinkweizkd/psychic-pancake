@@ -44,7 +44,6 @@
 	}
 
 	onMount(fetchPokemons);
-	console.log(pokemonCards);
 </script>
 
 <h1>Poke Deck</h1>
