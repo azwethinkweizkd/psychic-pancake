@@ -2,7 +2,7 @@
 </script>
 
 <main>
-	<h1>Pokemon Digital Trading and Battle Application</h1>
+	<h1>Home Page</h1>
 </main>
 
 <style>

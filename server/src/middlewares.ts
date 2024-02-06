@@ -1,8 +1,16 @@
 const jwt = require("jsonwebtoken");
-import type { Request, Response, NextFunction } from "express";
+import type {
+	Request as ExpressRequest,
+	Response,
+	NextFunction,
+} from "express";
+
+interface CustomRequest extends ExpressRequest {
+	payload?: any; // Define the payload property
+}
 
 function isAuthenticated(
-	req: Request | any,
+	req: CustomRequest,
 	res: Response,
 	next: NextFunction
 ) {
@@ -28,4 +36,4 @@ function isAuthenticated(
 	return next();
 }
 
-export { isAuthenticated };
+export { isAuthenticated, CustomRequest };

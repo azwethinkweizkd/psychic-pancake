@@ -1,8 +1,13 @@
-import type { Handle } from '@sveltejs/kit';
-import axios from 'axios';
+import { redirect, type Handle } from '@sveltejs/kit';
+import { getUserInfo } from '$lib/api/user/user';
+
+const unProtectedRoutes: string[] = ['/', '/login', '/register'];
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const response = await resolve(event);
+	let refreshTokenCookie = event.cookies.get('refreshToken');
 
-	return response;
+	if (!refreshTokenCookie && !unProtectedRoutes.includes(event.url.pathname))
+		throw redirect(303, '/');
+
+	return await resolve(event);
 };

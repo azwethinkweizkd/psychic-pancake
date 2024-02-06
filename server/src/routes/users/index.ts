@@ -1,24 +1,34 @@
 import express, { Request, Response, NextFunction } from "express";
 import db from "../../db";
-import { isAuthenticated } from "../../middlewares";
+import { isAuthenticated, CustomRequest } from "../../middlewares";
 import { findUserById } from "./users.services";
+import { findRefreshTokenById } from "../auth/auth.services";
 
 const router = express.Router();
 
-router.get("/is-authenticated", isAuthenticated, (req, res) => {
-	// Access user information from req.user if needed
-	res.json({ message: "Access granted. User authenticated." });
-});
+router.get(
+	"/user-profile",
+	isAuthenticated,
+	async (req: CustomRequest, res: Response, next: NextFunction) => {
+		try {
+			const { userId } = req.payload;
+			const user = await findUserById(userId);
 
-router.get("/all-users", async (_: Request, res: Response) => {
-	try {
-		const users = await db.user.findMany();
-		res.json(users);
-	} catch (error) {
-		res
-			.status(500)
-			.json({ error: "Something went wrong while retrieving users" });
+			let userRes = {
+				id: user?.id,
+				firstname: user?.firstname,
+				lastname: user?.lastname,
+				email: user?.email,
+			};
+			if (user) {
+				return res.json(userRes);
+			} else {
+				return res.status(401).json({ message: "Unauthorized" });
+			}
+		} catch (error) {
+			next(error);
+		}
 	}
-});
+);
 
 export default router;
