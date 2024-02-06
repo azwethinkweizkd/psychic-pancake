@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
-	import type { PokemonCard } from '../../../types/pokemon';
+	import type { PokemonCard } from '../types/pokemon';
 
 	export let pokemon: PokemonCard;
 

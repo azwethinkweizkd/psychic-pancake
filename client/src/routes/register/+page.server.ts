@@ -4,13 +4,17 @@ import axios from 'axios';
 export const actions = {
 	default: async ({ cookies, request }: any) => {
 		const data = await request.formData();
+		const firstname = data.get('firstname');
+		const lastname = data.get('lastname');
 		const email = data.get('email');
 		const password = data.get('password');
 
 		try {
 			const response = await axios.post(
-				'http://localhost:5000/api/auth/login',
+				'http://localhost:5000/api/auth/register',
 				{
+					firstname,
+					lastname,
 					email,
 					password
 				},

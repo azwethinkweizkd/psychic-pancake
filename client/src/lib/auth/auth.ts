@@ -19,17 +19,14 @@ export async function validateTokens(event: RequestEvent) {
 				sameSite: 'strict',
 				secure: import.meta.env.NODE_ENV === 'production',
 				maxAge: 60 * 60 * 8
-			});
-
-			cookies.set('accessToken', accessToken, {
-				path: '/',
-				httpOnly: true,
-				sameSite: 'strict',
-				secure: import.meta.env.NODE_ENV === 'production',
-				maxAge: 60 * 5
-			});
-		} else {
-			throw redirect(303, '/login');
+			}),
+				cookies.set('accessToken', accessToken, {
+					path: '/',
+					httpOnly: true,
+					sameSite: 'strict',
+					secure: import.meta.env.NODE_ENV === 'production',
+					maxAge: 60 * 30
+				});
 		}
 	} catch (error) {
 		console.error('Error validating tokens:', error);

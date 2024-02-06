@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { PokemonCard, Pokemon, Move } from '../../lib/types/pokemon';
-	import Pokecard from '../../lib/components/Pokecard.svelte';
+	import type { PokemonCard, Pokemon, Move } from '../../../lib/types/pokemon';
+	import Pokecard from '../../../lib/components/Pokecard.svelte';
 	import axios from 'axios';
 	import { onMount } from 'svelte';
 
@@ -44,7 +44,6 @@
 	}
 
 	onMount(fetchPokemons);
-	console.log(pokemonCards);
 </script>
 
 <h1>Poke Deck</h1>
