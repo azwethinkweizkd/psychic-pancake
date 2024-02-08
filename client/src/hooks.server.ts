@@ -1,5 +1,6 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 import { getUserInfo } from '$lib/api/user/user';
+import { validateTokens } from '$lib/auth/auth';
 
 const unProtectedRoutes: string[] = ['/', '/login', '/register'];
 
@@ -10,13 +11,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 		throw redirect(303, '/');
 
 	if (refreshTokenCookie) {
-		let refreshToken = event.cookies.get('refreshToken');
-		let userInfoResponse = await getUserInfo(refreshToken);
-		let user = userInfoResponse?.user;
+		await validateTokens(event).then(async () => {
+			let refreshToken = event.cookies.get('refreshToken');
+			let userInfoResponse = await getUserInfo(refreshToken);
+			let user = userInfoResponse?.user;
 
-		if (user) {
-			event.locals.user = user;
-		}
+			if (user) {
+				event.locals.user = user;
+			}
+		});
 	}
 
 	return await resolve(event);

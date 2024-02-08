@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import type { RequestEvent } from '../../routes/$types';
 import axios from 'axios';
 
-export async function validateTokens(event: RequestEvent) {
+export async function validateTokens(event: RequestEvent | null) {
 	const { cookies } = event;
 	try {
 		const refreshToken = cookies.get('refreshToken');
@@ -27,6 +27,8 @@ export async function validateTokens(event: RequestEvent) {
 					secure: import.meta.env.NODE_ENV === 'production',
 					maxAge: 60 * 30
 				});
+		} else {
+			return redirect(302, '/');
 		}
 	} catch (error) {
 		console.error('Error validating tokens:', error);
