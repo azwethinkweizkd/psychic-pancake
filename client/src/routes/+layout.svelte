@@ -13,6 +13,9 @@
 			<li>
 				<a href="/dashboard"> Dashboard </a>
 			</li>
+			<li>
+				<a href="/account">Account</a>
+			</li>
 
 			<li>
 				<form method="POST" action="/logout">
@@ -32,7 +35,7 @@
 <style>
 	nav {
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
 		align-items: center;
 		background-color: #f2f2f2;
 		padding: 10px;
@@ -63,6 +66,6 @@
 		font-size: large;
 	}
 	.container {
-		flex: 1; /* Take remaining space */
+		flex: 0.75;
 	}
 </style>

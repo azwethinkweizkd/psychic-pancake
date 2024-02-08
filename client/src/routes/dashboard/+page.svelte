@@ -4,11 +4,21 @@
 	export let data: PageData;
 </script>
 
-<h2>Dashboard</h2>
+<section>
+	<h2>Dashboard</h2>
 
-{#if data && data.user}
-	<p>
-		Welcome, {data.user.firstname}
-		{data.user.lastname}
-	</p>
-{/if}
+	{#if data && data.user}
+		<p>
+			Welcome, {data.user.firstname}
+			{data.user.lastname}
+		</p>
+		<a href="/dashboard/poke-deck">Poke Deck</a>
+	{/if}
+</section>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+	}
+</style>
