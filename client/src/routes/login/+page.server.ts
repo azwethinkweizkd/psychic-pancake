@@ -1,5 +1,4 @@
 import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
 
 export const actions = {
 	default: async ({ cookies, request }: any) => {
@@ -8,23 +7,20 @@ export const actions = {
 		const password = data.get('password');
 
 		try {
-			const response = await axios.post(
-				'http://localhost:5000/api/auth/login',
-				{
+			const response = await fetch('http://localhost:5000/api/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
 					email,
 					password
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				}
-			);
+				})
+			});
 
-			if (response.status === 200) {
-				const { data } = response;
-
-				cookies.set('refreshToken', data.refreshToken, {
+			if (response.ok) {
+				const responseData = await response.json();
+				cookies.set('refreshToken', responseData.refreshToken, {
 					path: '/',
 					httpOnly: true,
 					sameSite: 'strict',
