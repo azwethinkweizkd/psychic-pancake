@@ -1,4 +1,7 @@
 import express, { Express, Request, Response } from "express";
+import https from "https";
+import fs from "fs";
+
 import dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes";
@@ -13,6 +16,17 @@ app.use(express.json());
 
 app.use("/api", router);
 
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
-});
+if (process.env.NODE_ENV === "development") {
+	const options = {
+		key: fs.readFileSync("./src/ssl/server.key"),
+		cert: fs.readFileSync("./src/ssl/server.cert"),
+	};
+
+	https.createServer(options, app).listen(PORT, () => {
+		console.log(`Server running on https://localhost:${PORT}`);
+	});
+} else {
+	app.listen(PORT, () => {
+		console.log(`Server running on http://localhost:${PORT}`);
+	});
+}

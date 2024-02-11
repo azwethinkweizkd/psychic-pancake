@@ -1,8 +1,6 @@
-import express, { Request, Response, NextFunction } from "express";
-import db from "../../db";
+import express, { Response, NextFunction } from "express";
 import { isAuthenticated, CustomRequest } from "../../middlewares";
 import { findUserById } from "./users.services";
-import { findRefreshTokenById } from "../auth/auth.services";
 
 const router = express.Router();
 

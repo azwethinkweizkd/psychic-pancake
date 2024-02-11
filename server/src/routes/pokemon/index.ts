@@ -12,7 +12,7 @@ const generateUniqueRandomNumbers = (count: number, max: number): number[] => {
 	return numsArr;
 };
 
-const pokemonApi = (req: Request, res: Response) => {
+const pokemonApi = (_: Request, res: Response) => {
 	const numsArr = generateUniqueRandomNumbers(6, 151);
 	const pokemonPromises = numsArr.map((randomNumPoke) => {
 		return axios.get(`https://pokeapi.co/api/v2/pokemon/${randomNumPoke}`);

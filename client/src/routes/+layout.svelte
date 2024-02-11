@@ -5,16 +5,21 @@
 <nav>
 	<div class="container">
 		<h2>
-			<a href="/"> Pokemon App </a>
+			<a class="app-title-home-link" href="/">
+				<img
+					src="https://fontmeme.com/permalink/240208/3c7543c79f33b3acfa759966acc2fe6a.png"
+					alt="pokemon-font"
+				/>
+			</a>
 		</h2>
 	</div>
 	<ul>
 		{#if data.user}
 			<li>
-				<a href="/dashboard"> Dashboard </a>
+				<a class="nav-link" href="/dashboard"> Dashboard </a>
 			</li>
 			<li>
-				<a href="/account">Account</a>
+				<a class="nav-link" href="/account">Account</a>
 			</li>
 
 			<li>
@@ -24,7 +29,7 @@
 			</li>
 		{:else}
 			<li>
-				<a href="/login"> Login </a>
+				<a class="nav-link" href="/login"> Login </a>
 			</li>
 		{/if}
 	</ul>
@@ -39,6 +44,7 @@
 		align-items: center;
 		background-color: #f2f2f2;
 		padding: 10px;
+		background-color: #5db9ff;
 	}
 
 	ul {
@@ -51,13 +57,19 @@
 	li {
 		margin: 0 10px;
 	}
-	a {
+	.nav-link {
 		text-decoration: none;
-		color: #333;
+		color: fbd743;
+		font-size: large;
+		font-weight: 700;
+	}
+
+	.nav-link:visited {
+		color: whitesmoke;
 	}
 	button {
 		padding: 10px 14px;
-		background-color: #333;
+		background-color: #ff1f1f;
 		color: #f2f2f2;
 		border: none;
 		border-radius: 5px;
@@ -67,5 +79,15 @@
 	}
 	.container {
 		flex: 0.75;
+		color: whitesmoke;
+	}
+	.app-title-home-link {
+		font-weight: bolder;
+		font-size: xx-large;
+		text-decoration: none;
+	}
+
+	.app-title-home-link:visited {
+		color: whitesmoke;
 	}
 </style>
