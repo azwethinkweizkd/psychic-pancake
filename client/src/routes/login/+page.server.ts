@@ -34,8 +34,6 @@ export const actions = {
 						secure: import.meta.env.NODE_ENV === 'production',
 						maxAge: 60 * 30
 					});
-
-				return redirect(302, '/dashboard');
 			} else {
 				console.error('Login failed');
 			}

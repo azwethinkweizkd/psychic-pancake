@@ -16,17 +16,19 @@ app.use(express.json());
 
 app.use("/api", router);
 
-if (process.env.NODE_ENV === "development") {
-	const options = {
-		key: fs.readFileSync("./src/ssl/server.key"),
-		cert: fs.readFileSync("./src/ssl/server.cert"),
-	};
+app.listen(PORT, () => {
+	console.log(`Server running on http://localhost:${PORT}`);
+});
 
-	https.createServer(options, app).listen(PORT, () => {
-		console.log(`Server running on https://localhost:${PORT}`);
-	});
-} else {
-	app.listen(PORT, () => {
-		console.log(`Server running on http://localhost:${PORT}`);
-	});
-}
+// if (process.env.NODE_ENV === "development") {
+// 	const options = {
+// 		key: fs.readFileSync("./src/ssl/server.key"),
+// 		cert: fs.readFileSync("./src/ssl/server.cert"),
+// 	};
+
+// 	https.createServer(options, app).listen(PORT, () => {
+// 		console.log(`Server running on https://localhost:${PORT}`);
+// 	});
+// } else {
+
+// }
