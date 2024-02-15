@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { BACKEND_URL_LOCATION, NODE_ENV } from '$env/static/private';
 
 export const actions = {
 	default: async ({ cookies, request }: any) => {
@@ -7,7 +8,7 @@ export const actions = {
 		const password = data.get('password');
 
 		try {
-			const response = await fetch('http://localhost:5000/api/auth/login', {
+			const response = await fetch(`${BACKEND_URL_LOCATION}/api/auth/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -24,14 +25,14 @@ export const actions = {
 					path: '/',
 					httpOnly: true,
 					sameSite: 'strict',
-					secure: import.meta.env.NODE_ENV === 'production',
+					secure: NODE_ENV === 'production',
 					maxAge: 60 * 60 * 8
 				}),
 					cookies.set('accessToken', data.accessToken, {
 						path: '/',
 						httpOnly: true,
 						sameSite: 'strict',
-						secure: import.meta.env.NODE_ENV === 'production',
+						secure: NODE_ENV === 'production',
 						maxAge: 60 * 30
 					});
 			} else {
