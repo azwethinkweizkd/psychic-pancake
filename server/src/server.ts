@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
-import https from "https";
-import fs from "fs";
+// import https from "https";
+// import fs from "fs";
 
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes";
 
