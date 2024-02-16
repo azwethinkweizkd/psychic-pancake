@@ -9,7 +9,7 @@
 
 	async function fetchPokemons() {
 		try {
-			const response = await axios.get<Pokemon[]>('http://localhost:5000/api/pokemon');
+			const response = await axios.get<Pokemon[]>(`http://localhost:5000/api/pokemon`);
 			const pokemons = response.data;
 
 			pokemons.forEach((pokemon) => {
