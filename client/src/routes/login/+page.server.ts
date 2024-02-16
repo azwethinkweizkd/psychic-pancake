@@ -1,7 +1,8 @@
 import { BACKEND_URL_LOCATION, NODE_ENV } from '$env/static/private';
+import { getUserInfo } from '../../hooks.server';
 
 export const actions = {
-	default: async ({ cookies, request }: any) => {
+	default: async ({ cookies, request, locals }: any) => {
 		const data = await request.formData();
 		const email = data.get('email');
 		const password = data.get('password');
@@ -34,6 +35,8 @@ export const actions = {
 						secure: NODE_ENV === 'production',
 						maxAge: 60 * 30
 					});
+
+				locals.user = await getUserInfo(responseData.refreshToken);
 			} else {
 				console.error('Login failed');
 			}

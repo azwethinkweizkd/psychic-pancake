@@ -1,9 +1,9 @@
-import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
 import { BACKEND_URL_LOCATION, NODE_ENV } from '$env/static/private';
+import { getUserInfo } from '../../hooks.server.js';
 
 export const actions = {
-	default: async ({ cookies, request }: any) => {
+	default: async ({ cookies, request, locals }: any) => {
 		const data = await request.formData();
 		const firstname = data.get('firstname');
 		const lastname = data.get('lastname');
@@ -43,8 +43,7 @@ export const actions = {
 						secure: NODE_ENV === 'production',
 						maxAge: 60 * 30
 					});
-
-				return redirect(302, '/dashboard');
+				locals.user = await getUserInfo(data.refreshToken);
 			} else {
 				console.error('Login failed');
 			}
