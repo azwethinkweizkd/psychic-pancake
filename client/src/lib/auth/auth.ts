@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { BACKEND_URL_LOCATION, NODE_ENV } from '$env/static/private';
 import type { RequestEvent } from '../../routes/$types';
 import axios from 'axios';
 
@@ -6,7 +7,7 @@ export async function validateTokens(event: RequestEvent | null) {
 	const { cookies } = event;
 	try {
 		const refreshToken = cookies.get('refreshToken');
-		const response = await axios.post('http://localhost:5000/api/auth/refreshToken', {
+		const response = await axios.post(`${BACKEND_URL_LOCATION}/api/auth/refreshToken`, {
 			refreshToken
 		});
 
@@ -17,14 +18,14 @@ export async function validateTokens(event: RequestEvent | null) {
 				path: '/',
 				httpOnly: true,
 				sameSite: 'strict',
-				secure: import.meta.env.NODE_ENV === 'production',
+				secure: NODE_ENV === 'production',
 				maxAge: 60 * 60 * 8
 			}),
 				cookies.set('accessToken', accessToken, {
 					path: '/',
 					httpOnly: true,
 					sameSite: 'strict',
-					secure: import.meta.env.NODE_ENV === 'production',
+					secure: NODE_ENV === 'production',
 					maxAge: 60 * 30
 				});
 		} else {

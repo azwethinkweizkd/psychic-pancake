@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
+import { BACKEND_URL_LOCATION, NODE_ENV } from '$env/static/private';
 
 export const actions = {
 	default: async ({ cookies, request }: any) => {
@@ -11,7 +12,7 @@ export const actions = {
 
 		try {
 			const response = await axios.post(
-				'http://localhost:5000/api/auth/register',
+				`${BACKEND_URL_LOCATION}/api/auth/register`,
 				{
 					firstname,
 					lastname,
@@ -32,14 +33,14 @@ export const actions = {
 					path: '/',
 					httpOnly: true,
 					sameSite: 'strict',
-					secure: import.meta.env.NODE_ENV === 'production',
+					secure: NODE_ENV === 'production',
 					maxAge: 60 * 60 * 8
 				}),
 					cookies.set('accessToken', data.accessToken, {
 						path: '/',
 						httpOnly: true,
 						sameSite: 'strict',
-						secure: import.meta.env.NODE_ENV === 'production',
+						secure: NODE_ENV === 'production',
 						maxAge: 60 * 30
 					});
 
