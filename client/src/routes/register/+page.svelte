@@ -1,3 +1,14 @@
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	export let data;
+	onMount(() => {
+		if (data.user) {
+			goto('/dashboard');
+		}
+	});
+</script>
+
 <div class="login-register-container">
 	<form class="login-register-form" method="POST" action="/register">
 		<input

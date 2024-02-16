@@ -16,7 +16,7 @@
 	<ul>
 		{#if data.user}
 			<li>
-				<a class="nav-link" href="/dashboard"> Dashboard </a>
+				<a class="nav-link" href="/dashboard">Dashboard</a>
 			</li>
 			<li>
 				<a class="nav-link" href="/account">Account</a>
