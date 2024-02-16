@@ -1,4 +1,3 @@
-import { redirect } from '@sveltejs/kit';
 import { BACKEND_URL_LOCATION, NODE_ENV } from '$env/static/private';
 
 export const actions = {
@@ -28,7 +27,7 @@ export const actions = {
 					secure: NODE_ENV === 'production',
 					maxAge: 60 * 60 * 8
 				}),
-					cookies.set('accessToken', data.accessToken, {
+					cookies.set('accessToken', responseData.accessToken, {
 						path: '/',
 						httpOnly: true,
 						sameSite: 'strict',
