@@ -28,8 +28,8 @@
 
 <style>
 	:global(.login-register-container) {
-		width: 55%;
-		margin: 0 auto;
+		width: 35%;
+		margin: 5rem auto;
 		border-radius: 16px;
 		border: 1px solid lightblue;
 		box-shadow: 7.5px 7.5px 10px 10px mediumturquoise;
